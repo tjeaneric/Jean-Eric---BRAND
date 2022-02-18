@@ -1,0 +1,153 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ------------------------ */
+/* GENERAL STYLES */
+/* ------------------------ */
+body {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.container {
+  width: 960px;
+  margin: 0 auto;
+}
+
+header {
+  background-image: url(/img/home-shape.png);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  /* background-attachment: fixed; */
+  background-color: #fff;
+
+  display: grid;
+  align-items: start;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 0px;
+  column-gap: 80px;
+  margin-bottom: 20px;
+}
+
+.main-header {
+  background-color: #fff;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  grid-column: 1/-1;
+}
+
+.main-header h1 {
+  font-size: 22px;
+  color: #343a40;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.main-header nav {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.main-header nav a:link {
+  color: #000;
+  text-decoration: none;
+  margin-right: 10px;
+  color: #343a40;
+  background-color: transparent !important;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.main-header nav a:link:last-child {
+  margin-right: 0;
+}
+
+.main-header nav a:visited {
+  color: #000;
+}
+
+.main-header nav a:hover {
+  color: #0d6efd;
+  font-weight: bold;
+  text-decoration: underline #0d6efd;
+}
+
+.main-header nav a:active {
+  background-color: #0d6efd;
+}
+
+.header-text-box {
+  align-self: center;
+  justify-self: center;
+}
+
+.looking {
+  margin-bottom: 20px;
+  border-radius: 30px;
+  background: #fff;
+  text-align: center;
+  display: inline-block;
+}
+
+.header-text-box h1 {
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  font-weight: 600;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.header-text {
+  padding: 5px;
+  margin-bottom: 20px;
+  color: #232529 !important;
+  font-size: 15px;
+  line-height: 26px;
+}
+
+.btn {
+  font-weight: 600;
+  padding: 8px 34px;
+  border-radius: 7px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  display: block;
+  border: none;
+}
+
+.btn--hire {
+  background-color: #0078e7;
+  color: #fff;
+  margin-right: 30px;
+}
+
+.btn--download {
+  background-color: #fff;
+  color: #0078e7;
+  border: 1px solid #0078e7;
+}
+
+.button-box {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.profile {
+  align-self: stretch;
+  justify-self: center;
+  width: 75%;
+}
+
+footer {
+  background-color: #746c6c;
+  padding: 25px 0;
+  text-align: center;
+}
