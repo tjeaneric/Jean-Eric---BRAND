@@ -19,6 +19,35 @@ allLinks.forEach(function (link) {
   });
 });
 
+//LOGIN WINDOW
+
+const loginLink = document.querySelector(".login-link");
+const loginForm = document.querySelector(".login");
+const overlay = document.querySelector(".overlay");
+const selectionBody = document.body;
+const btnCloseModal = document.querySelector(".close-modal");
+
+const openModal = function () {
+  loginForm.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+  selectionBody.classList.add("overflow-body");
+};
+
+const closeModal = function () {
+  loginForm.classList.add("hidden");
+  overlay.classList.add("hidden");
+  selectionBody.classList.remove("overflow-body");
+};
+
+loginLink.addEventListener("click", openModal);
+overlay.addEventListener("click", closeModal);
+btnCloseModal.addEventListener("click", closeModal);
+
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && !loginForm.classList.contains("hidden"))
+    closeModal();
+});
+
 //STICKY NAVBAR
 
 // const sectionHeroEl = document.querySelector(".main-header");
