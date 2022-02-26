@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/125f9750f1.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="messages.css" />
+    <title>Articles</title>
+  </head>
+  <body>
+    <header>
+      <a href="/index.html"><h1>Jean Eric</h1></a>
+
+      <nav>
+        <a href="/index.html">Home</a>
+        <a href="#services">Services</a>
+        <a href="#resume">Resume</a>
+        <a href="#projects">Projects</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact-me">Contact</a>
+      </nav>
+    </header>
+    <div class="container">
+      <main>
+        <div class="menu">
+          <h1>Dashboard</h1>
+
+          <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="">Messages</a></li>
+            <li><a href="../article/article.html">Articles</a></li>
+            <li><a href="">Profile</a></li>
+
+            <li><a href="/index.html">Logout</a></li>
+          </ul>
+        </div>
+        <div class="details">
+          <h2>Articles</h2>
+
+          <div class="article-crud">
+            <a href="#"><i class="fa-solid fa-trash delete-icon"></i></a>
+          </div>
+
+          <div class="grid-2-cols">
+            <div class="inbox-menu">
+              <ul>
+                <li><a href="#">Inbox</a></li>
+                <li><a href="#">Starred</a></li>
+                <li><a href="#">Trash</a></li>
+              </ul>
+            </div>
+            <div class="message-list">
+              <ul id="message"></ul>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyAZtamg7ALb_AZ4mDFwSJ7ld9p7O0R-3os",
+        authDomain: "jean-eric-brand.firebaseapp.com",
+        projectId: "jean-eric-brand",
+        storageBucket: "jean-eric-brand.appspot.com",
+        messagingSenderId: "210719210014",
+        appId: "1:210719210014:web:18abc9d2f5b01745dc4c0f",
+        measurementId: "G-8HW0N7MV50",
+      };
+      const message = document.querySelector("#message");
+
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+
+      const db = app.firestore();
+
+      // READ DATA
+
+      function renderMessage(doc) {
+        let li = document.createElement("li");
+        let name = document.createElement("p");
+        let messageBody = document.createElement("p");
+        let checkbox = document.createElement("input");
+        let deleteIcon = document.createElement("a");
+        checkbox.setAttribute("type", "checkbox");
+        checkbox.className = "checkbox";
+        name.className = "name";
+        messageBody.className = "body";
+        deleteIcon.setAttribute("href", "#");
+        deleteIcon.innerHTML = '<i class="fa-solid fa-trash deleIcon"></i>';
+
+        li.setAttribute("data-id", doc.id);
+        name.textContent = doc.data().Name;
+        messageBody.textContent = doc.data().Message;
+        li.appendChild(checkbox);
+        li.appendChild(deleteIcon);
+        li.appendChild(name);
+        li.appendChild(messageBody);
+
+        message.appendChild(li);
+
+        // DELETE DATA
+        deleteIcon.addEventListener("click", (e) => {
+          let id = e.target.parentElement.parentElement.getAttribute("data-id");
+          console.log("checked");
+          console.log(id);
+
+          db.collection("Messages")
+            .doc(id)
+            .delete()
+            .then(() => {
+              console.log("Document successfully deleted!");
+            })
+            .catch((error) => {
+              console.error("Error removing document: ", error);
+            });
+        });
+      }
+
+      db.collection("Messages")
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            renderMessage(doc);
+          });
+        });
+    </script>
+  </body>
+</html>

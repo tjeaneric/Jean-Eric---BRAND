@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <header>
+      <a href="/index.html"><h1>Jean Eric</h1></a>
+
+      <nav>
+        <a href="/index.html">Home</a>
+        <a href="#services">Services</a>
+        <a href="#resume">Resume</a>
+        <a href="#projects">Projects</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact-me">Contact</a>
+      </nav>
+    </header>
+    <div class="container">
+      <main>
+        <div class="menu">
+          <h1>Welcome</h1>
+
+          <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="messages/messages.html">Messages</a></li>
+            <li><a href="article/article.html">Articles</a></li>
+            <li><a href="">Profile</a></li>
+
+            <li><a id="logout" href="/index.html">Logout</a></li>
+          </ul>
+        </div>
+        <div class="details">
+          <h2>Dashboard</h2>
+          <div class="grid-3-cols">
+            <div><h1>Messages</h1></div>
+            <div><h1>Messages</h1></div>
+            <div><h1>Messages</h1></div>
+            <div><h1>Articles</h1></div>
+            <div><h1>Articles</h1></div>
+            <div><h1>Articles</h1></div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+
+    <script>
+      const logout = document.getElementById("logout");
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAZtamg7ALb_AZ4mDFwSJ7ld9p7O0R-3os",
+        authDomain: "jean-eric-brand.firebaseapp.com",
+        projectId: "jean-eric-brand",
+        storageBucket: "jean-eric-brand.appspot.com",
+        messagingSenderId: "210719210014",
+        appId: "1:210719210014:web:18abc9d2f5b01745dc4c0f",
+        measurementId: "G-8HW0N7MV50",
+      };
+
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+
+      const db = app.firestore();
+
+      // CHECK IF USER IS LOGGED IN
+
+      firebase.auth().onAuthStateChanged((user) => {
+        if (!user) {
+          window.location.href = "/index.html";
+        }
+      });
+
+      //LOGOUT
+
+      logout.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        firebase
+          .auth()
+          .signOut()
+          .then(() => {
+            console.log("Sign-out successful.");
+            window.location.href = "/index.html";
+          })
+          .catch((error) => {
+            // An error happened.
+          });
+      });
+    </script>
+  </body>
+</html>

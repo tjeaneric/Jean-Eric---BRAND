@@ -13,7 +13,7 @@ body {
 }
 
 .container {
-  width: 960px;
+  width: 1200px;
   margin: 0 auto;
 }
 
@@ -36,7 +36,7 @@ header {
   padding: 20px 40px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 30px;
   position: -webkit-sticky;
   position: sticky;
@@ -55,6 +55,7 @@ header h1 {
   font-weight: 700;
   letter-spacing: 1px;
   font-weight: bold;
+  margin-right: 600px;
 }
 
 header nav {

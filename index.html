@@ -14,44 +14,48 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+
+    <script
+      src="https://kit.fontawesome.com/125f9750f1.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="css/style.css" />
     <title>Jean Eric - Portfolio</title>
   </head>
   <body>
-    <div class="container">
-      <header id="header" class="header">
-        <div class="main-header sticky">
-          <a href="#header"><h1>Jean Eric</h1></a>
+    <header>
+      <a href="#header"><h1>Jean Eric</h1></a>
 
-          <nav>
-            <a href="#header">Home</a>
-            <a href="#services">Services</a>
-            <a href="#resume">Resume</a>
-            <a href="#projects">Projects</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact-me">Contact</a>
-            <a class="login-link" href="#">Login</a>
-          </nav>
-        </div>
-        <div class="header-body">
-          <div class="header-text-box">
-            <p class="looking">Looking for a Software Developer</p>
-            <h1>
-              Here I am Jean Eric <br />
-              TUYISHIMIRE
-            </h1>
-            <p class="header-text">
-              Obviously I'm a Software Developer with over 3 years <br />
-              of experience with all stages of the development
-            </p>
-            <div class="button-box">
-              <button class="btn btn--hire" href="#">Hire Me</button>
-              <button class="btn btn--download">Download CV</button>
-            </div>
+      <nav>
+        <a href="#header">Home</a>
+        <a href="#services">Services</a>
+        <a href="#resume">Resume</a>
+        <a href="#projects">Projects</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact-me">Contact</a>
+        <a class="login-link" href="#">Login</a>
+      </nav>
+    </header>
+    <div class="container">
+      <section class="hero">
+        <div class="hero-text">
+          <p class="looking">Looking for a Software Developer</p>
+          <h1>
+            Here I am Jean Eric <br />
+            TUYISHIMIRE
+          </h1>
+          <p class="header-text">
+            Obviously I'm a Software Developer with over 3 years <br />
+            of experience with all stages of the development
+          </p>
+          <div>
+            <button class="btn cta hire">Hire Me</button
+            ><button class="btn cta download">Download CV</button>
           </div>
-          <img src="img/ericdev.jpg" alt="Photo" class="profile" />
         </div>
-      </header>
+
+        <img src="img/ericdev.jpg" alt="Eric's Photo" />
+      </section>
       <section class="services" id="services">
         <h2>awesome services</h2>
         <div class="grid-3-cols">
@@ -200,40 +204,50 @@
         <div class="stack grid-4-cols">
           <div class="stack-box">
             <p class="logo">
-              <ion-icon name="logo-python"></ion-icon>
+              <i class="fa-brands fa-python"></i>
             </p>
             <h4>Python</h4>
-            <p>
-              Python is an interpreted, high-level, general-purpose programming
-              language.
+            <p class="lang-text">
+              Python is an interpreted high-level general-purpose programming
+              language. Its design philosophy emphasizes code readability with
+              the use of significant indentation. Its language constructs and
+              object-oriented approach aim to help programmers write clear,
+              logical code for small- and large-scale projects.
             </p>
           </div>
           <div class="stack-box">
-            <p class="logo"><ion-icon name="logo-python"></ion-icon></p>
-            <h4>Python</h4>
-            <p>
-              Python is an interpreted, high-level, general-purpose programming
-              language.
-            </p>
-          </div>
-          <div class="stack-box">
-            <p class="logo">
-              <ion-icon name="logo-python"></ion-icon>
-            </p>
-            <h4>Python</h4>
-            <p>
-              Python is an interpreted, high-level, general-purpose programming
-              language.
+            <p class="logo"><i class="fa-brands fa-js"></i></p>
+            <h4>JavaScript</h4>
+            <p class="lang-text">
+              JavaScript, often abbreviated JS, is a programming language that
+              is one of the core technologies of the World Wide Web, alongside
+              HTML and CSS. Over 97% of websites use JavaScript on the client
+              side for web page behavior, often incorporating third-party
+              libraries.
             </p>
           </div>
           <div class="stack-box">
             <p class="logo">
-              <ion-icon name="logo-python"></ion-icon>
+              <i class="fa-brands fa-html5"></i>
             </p>
-            <h4>Python</h4>
-            <p>
-              Python is an interpreted, high-level, general-purpose programming
-              language.
+            <h4>html5</h4>
+            <p class="lang-text">
+              The HyperText Markup Language, or HTML is the standard markup
+              language for documents designed to be displayed in a web browser.
+              It can be assisted by technologies such as Cascading Style Sheets
+              and scripting languages such as JavaScript.
+            </p>
+          </div>
+          <div class="stack-box">
+            <p class="logo">
+              <i class="fa-brands fa-css3"></i>
+            </p>
+            <h4>css3</h4>
+            <p class="lang-text">
+              Cascading Style Sheets is a style sheet language used for
+              describing the presentation of a document written in a markup
+              language such as HTML. CSS is a cornerstone technology of the
+              World Wide Web, alongside HTML and JavaScript.
             </p>
           </div>
         </div>
@@ -307,14 +321,29 @@
 
         <div class="grid-3-cols">
           <div class="project-box">
-            <img src="/img/how-apps.jpg" alt="" />
-            <p>API bus</p>
+            <img src="/img/default.png" alt="" />
+            <p class="project-title">FARMVEST API</p>
           </div>
-          <div class="project-box"><img src="/img/how-apps.jpg" alt="" /></div>
-          <div class="project-box"><img src="/img/how-apps.jpg" alt="" /></div>
-          <div class="project-box"><img src="/img/how-apps.jpg" alt="" /></div>
-          <div class="project-box"><img src="/img/how-apps.jpg" alt="" /></div>
-          <div class="project-box"><img src="/img/how-apps.jpg" alt="" /></div>
+          <div class="project-box">
+            <img src="/img/default.png" alt="" />
+            <p class="project-title">FARMVEST API</p>
+          </div>
+          <div class="project-box">
+            <img src="/img/default.png" alt="" />
+            <p class="project-title">FARMVEST API</p>
+          </div>
+          <div class="project-box">
+            <img src="/img/default.png" alt="" />
+            <p class="project-title">FARMVEST API</p>
+          </div>
+          <div class="project-box">
+            <img src="/img/default.png" alt="" />
+            <p class="project-title">FARMVEST API</p>
+          </div>
+          <div class="project-box">
+            <img src="/img/default.png" alt="" />
+            <p class="project-title">FARMVEST API</p>
+          </div>
         </div>
       </section>
 
@@ -331,7 +360,11 @@
               </p>
               <div class="blog-date">
                 <strong>Feb 19</strong>
-                <a href="/blog-detail/detail.html" class="read-more"
+                <a
+                  href="/blog-detail/detail.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="read-more"
                   >Read more ></a
                 >
               </div>
@@ -347,7 +380,11 @@
               </p>
               <div class="blog-date">
                 <strong>Feb 19</strong>
-                <a href="/blog-detail/detail.html" class="read-more"
+                <a
+                  href="/blog-detail/detail.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="read-more"
                   >Read more ></a
                 >
               </div>
@@ -363,7 +400,11 @@
               </p>
               <div class="blog-date">
                 <strong>Feb 19</strong>
-                <a href="/blog-detail/detail.html" class="read-more"
+                <a
+                  href="/blog-detail/detail.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="read-more"
                   >Read more ></a
                 >
               </div>
@@ -379,7 +420,11 @@
               </p>
               <div class="blog-date">
                 <strong>Feb 19</strong>
-                <a href="/blog-detail/detail.html" class="read-more"
+                <a
+                  href="/blog-detail/detail.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="read-more"
                   >Read more ></a
                 >
               </div>
@@ -395,7 +440,11 @@
               </p>
               <div class="blog-date">
                 <strong>Feb 19</strong>
-                <a href="/blog-detail/detail.html" class="read-more"
+                <a
+                  href="/blog-detail/detail.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="read-more"
                   >Read more ></a
                 >
               </div>
@@ -411,7 +460,11 @@
               </p>
               <div class="blog-date">
                 <strong>Feb 19</strong>
-                <a href="/blog-detail/detail.html" class="read-more"
+                <a
+                  href="/blog-detail/detail.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="read-more"
                   >Read more ></a
                 >
               </div>
@@ -503,6 +556,7 @@
               <input
                 class="contact-input"
                 type="text"
+                id="name"
                 placeholder="Your Name:"
                 required
               />
@@ -511,6 +565,7 @@
               <input
                 class="contact-input"
                 type="email"
+                id="email"
                 placeholder="Your email:"
                 required
               />
@@ -520,6 +575,7 @@
               <input
                 class="contact-input"
                 type="text"
+                id="subject"
                 placeholder="Your subject:"
                 required
               />
@@ -531,14 +587,13 @@
               class="contact-input"
               class="your-message"
               placeholder="Your message:"
-              name="message"
-              id=""
+              id="message"
               cols="30"
               rows="10"
               required
             ></textarea>
           </div>
-          <button class="btn send">Send Message</button>
+          <button type="submit" class="btn send">Send Message</button>
         </form>
 
         <div class="subscribe">
@@ -587,7 +642,7 @@
         </div>
       </section>
 
-      <form action="">
+      <form action="/dashboard/dashboard.html" class="login-form" method="POST">
         <div class="login hidden">
           <h2>Jean Eric</h2>
           <div>
@@ -596,6 +651,7 @@
               <input
                 class="login-input"
                 type="email"
+                name="email"
                 placeholder="Email or Phone number"
                 required
               />
@@ -604,11 +660,12 @@
               <input
                 class="login-input"
                 type="password"
+                name="password"
                 placeholder="Password"
                 required
               />
             </p>
-            <button class="btn login-btn">Login</button>
+            <button type="submit" class="btn login-btn">Login</button>
             <p class="login-p">Or login with:</p>
             <ion-icon name="logo-facebook"></ion-icon
             ><ion-icon name="logo-google"></ion-icon>
@@ -623,6 +680,80 @@
       </form>
 
       <div class="overlay hidden"></div>
+      <footer>Copyright &copy; 2022 by Jean Eric. All rights reserved</footer>
+
+      <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+
+      <script>
+        const form = document.querySelector(".login-form");
+        const messageForm = document.querySelector(".contact-form");
+        console.log(messageForm.name.value);
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyAZtamg7ALb_AZ4mDFwSJ7ld9p7O0R-3os",
+          authDomain: "jean-eric-brand.firebaseapp.com",
+          projectId: "jean-eric-brand",
+          storageBucket: "jean-eric-brand.appspot.com",
+          messagingSenderId: "210719210014",
+          appId: "1:210719210014:web:18abc9d2f5b01745dc4c0f",
+          measurementId: "G-8HW0N7MV50",
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          app
+            .auth()
+            .signInWithEmailAndPassword(form.email.value, form.password.value)
+            .then((userCredential) => {
+              // Signed in
+              var user = userCredential.user;
+              console.log("logged in");
+              // window.open("/dashboard/dashboard.html");
+              window.location.href = "/dashboard/dashboard.html";
+              // ...
+            })
+            .catch((error) => {
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              alert(errorMessage);
+            });
+        });
+
+        const db = app.firestore();
+
+        messageForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          let name = document.getElementById("name").value;
+          let email = document.getElementById("email").value;
+          let subject = document.getElementById("subject").value;
+          let message = document.getElementById("message").value;
+
+          db.collection("Messages")
+            .add({
+              Name: name,
+              Email: email,
+              Subject: subject,
+              Message: message,
+            })
+            .then((docRef) => {
+              console.log("Document written with ID: ", docRef.id);
+              alert("Message sent");
+            })
+            .catch((error) => {
+              console.error("Error adding document: ", error);
+              alert(error);
+            });
+
+          messageForm.reset();
+        });
+      </script>
 
       <script
         type="module"
@@ -633,7 +764,6 @@
         src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
       ></script>
       <script src="/js/script.js"></script>
-      <footer>Copyright &copy; 2022 by Jean Eric. All rights reserved</footer>
     </div>
   </body>
 </html>
