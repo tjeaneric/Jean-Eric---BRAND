@@ -40,14 +40,19 @@ header {
   box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.07);
 }
 
-header h1 {
+.my-logo {
+  height: 2.4rem;
+  margin-right: 600px;
+}
+
+/* header h1 {
   font-size: 22px;
   color: #343a40;
   font-weight: 700;
   letter-spacing: 1px;
   font-weight: bold;
   margin-right: 600px;
-}
+} */
 
 header nav {
   font-size: 14px;

@@ -50,18 +50,48 @@ document.addEventListener("keydown", function (e) {
 
 //STICKY NAVBAR
 
-// const sectionHeroEl = document.querySelector(".main-header");
-// const obs = new IntersectionObserver(
-//   function (entries) {
-//     const ent = entries[0];
-//     console.log(ent);
-//     if (ent.isIntersecting === false) {
-//       document.querySelector(".main-header").classList.add("sticky");
-//     }
-//   },
-//   {
-//     root: null,
-//     threshold: 0,
-//   }
-// );
-// obs.observe(sectionHeroEl);
+const sectionHeroEl = document.querySelector(".hero");
+const obs = new IntersectionObserver(
+  function (entries) {
+    const ent = entries[0];
+    console.log(ent);
+    if (ent.isIntersecting === false) {
+      document.body.classList.add("sticky");
+    }
+    if (ent.isIntersecting === true) {
+      document.body.classList.remove("sticky");
+    }
+  },
+  {
+    // in the viewport
+    root: null,
+    //when 0% of the hero section is in the viewport
+    threshold: 0,
+    rootMargin: "-40px",
+  }
+);
+obs.observe(sectionHeroEl);
+
+//ACTIVE NAV LINK ON SCROLL
+
+const sections = document.querySelectorAll("section");
+
+const nav = document.querySelectorAll("header nav a");
+
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+
+    if (scrollY > sectionTop) {
+      current = section.getAttribute("id");
+    }
+  });
+  nav.forEach((a) => {
+    a.classList.remove("active");
+    if (a.classList.contains(current)) {
+      a.classList.add("active");
+    }
+  });
+});
