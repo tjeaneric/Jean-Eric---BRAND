@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/125f9750f1.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="new.css" />
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+    <title>New Articles</title>
+  </head>
+  <body>
+    <header>
+      <a href="/index.html"
+        ><img class="my-logo" src="/img/logo1.png" alt=""
+      /></a>
+
+      <nav>
+        <a href="/index.html">Home</a>
+        <a href="#services">Services</a>
+        <a href="#resume">Resume</a>
+        <a href="#projects">Projects</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact-me">Contact</a>
+      </nav>
+    </header>
+    <div class="container">
+      <main>
+        <div class="menu">
+          <h1>Welcome</h1>
+
+          <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../messages/messages.html">Messages</a></li>
+            <li><a href="article.html">Articles</a></li>
+            <li><a href="">Profile</a></li>
+
+            <li><a href="/index.html">Logout</a></li>
+          </ul>
+        </div>
+        <div class="details">
+          <h2>New Article</h2>
+
+          <form class="new-article-form" action="" method="post">
+            <input
+              class="article-title"
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Title"
+            />
+
+            <input class="article-title" type="date" name="date" id="date" />
+            <input class="article-title" type="file" name="file" id="file" />
+            <textarea
+              class="article-title"
+              name="body"
+              id="body"
+              cols="30"
+              rows="10"
+            ></textarea>
+            <button class="btn post" type="submit">Post</button>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+
+    <script>
+      const form = document.querySelector(".new-article-form");
+      console.log(form.title);
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAZtamg7ALb_AZ4mDFwSJ7ld9p7O0R-3os",
+        authDomain: "jean-eric-brand.firebaseapp.com",
+        projectId: "jean-eric-brand",
+        storageBucket: "jean-eric-brand.appspot.com",
+        messagingSenderId: "210719210014",
+        appId: "1:210719210014:web:18abc9d2f5b01745dc4c0f",
+        measurementId: "G-8HW0N7MV50",
+      };
+
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+
+      const db = app.firestore();
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let title = document.getElementById("title").value;
+        let date = document.getElementById("date").value;
+        let photo = document.getElementById("file").value;
+        let body = document.getElementById("body").value;
+
+        db.collection("Posts")
+          .add({
+            Title: title,
+            Date: date,
+            Photo: photo,
+            Body: body,
+          })
+          .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+            alert("Article posted successfully");
+          })
+          .catch((error) => {
+            console.error("Error adding document: ", error);
+            alert(error);
+          });
+
+        form.reset();
+      });
+    </script>
+
+    <script>
+      CKEDITOR.replace("body");
+    </script>
+  </body>
+</html>
