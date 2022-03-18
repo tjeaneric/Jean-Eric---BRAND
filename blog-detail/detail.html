@@ -11,6 +11,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="detail.css" />
+    <script
+      src="https://kit.fontawesome.com/125f9750f1.js"
+      crossorigin="anonymous"
+    ></script>
 
     <title>Blog Title</title>
   </head>
@@ -37,24 +41,11 @@
           <h3>Jean Eric > Blog > Blog detail</h3>
         </section>
 
-        <section class="row">
+        <section id="article" class="row article">
           <figure class="blog-text">
             <img src="img/theme.jpg" alt="" />
             <div class="tag">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="tag-icon"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
-                />
-              </svg>
+              <i class="fa-solid fa-tag tag-icon"></i>
 
               <h4>Software application</h4>
             </div>
@@ -64,47 +55,17 @@
               eu placerat lorem condimentum nulla fusce dignissim. Adipiscing
               adipiscing tortor condimentum elit
             </p>
-            <blockquote>
-              “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisi, ac
-              aliquam arcu volutpat, massa purus in.”
-            </blockquote>
             <p class="blog-p">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisi, ac
               aliquam arcu volutpat, massa purus in.
             </p>
             <div class="comment-row">
               <div class="like-row">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="like-comment"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  />
-                </svg>
+                <i class="fa-solid fa-thumbs-up like-comment"></i>
                 <p>33</p>
               </div>
               <div class="like-row">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="like-comment"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                  />
-                </svg>
+                <i class="fa-solid fa-comment like-comment"></i>
                 <p>33</p>
               </div>
             </div>
@@ -113,20 +74,7 @@
               <div class="reply-row">
                 <p>Gakyeli</p>
                 <p>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="reply"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
-                    />
-                  </svg>
+                  <i class="fa-solid fa-reply reply"></i>
                   reply
                 </p>
               </div>
@@ -141,20 +89,7 @@
               <div class="reply-row">
                 <p>Gakyeli</p>
                 <p>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="reply"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
-                    />
-                  </svg>
+                  <i class="fa-solid fa-reply reply"></i>
                   reply
                 </p>
               </div>
@@ -169,20 +104,7 @@
               <div class="reply-row">
                 <p>Gakyeli</p>
                 <p>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="reply"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
-                    />
-                  </svg>
+                  <i class="fa-solid fa-reply reply"></i>
                   reply
                 </p>
               </div>
@@ -236,5 +158,39 @@
       </main>
       <footer>Copyright &copy; 2022 by Jean Eric. All rights reserved</footer>
     </div>
+
+    <script>
+      const article_detail = document.querySelector("#article");
+      console.log(article_detail);
+
+      function renderArticle(doc) {
+        let figure = document.createElement("figure");
+        let image = document.createElement("image");
+        let blog = document.createElement("p");
+
+        blog.className = "blog-p";
+        blog.innerHTML = doc.author;
+        figure.className = "blog-text";
+        image.src = doc.photo;
+        console.log(doc.photo);
+        figure.appendChild(blog);
+        figure.appendChild(image);
+        article_detail.appendChild(figure);
+      }
+
+      const qString = new URLSearchParams(window.location.search);
+      const id = qString.get("article_id");
+
+      fetch(`https://jean-eric-brand-api.herokuapp.com/api/v1/articles/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const article = data.data.data;
+          renderArticle(article);
+          console.log(article);
+          // articles.forEach((article) => {
+          //   renderMessage(article);
+          // });
+        });
+    </script>
   </body>
 </html>

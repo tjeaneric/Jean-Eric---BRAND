@@ -45,15 +45,6 @@ header {
   margin-right: 600px;
 }
 
-/* header h1 {
-  font-size: 22px;
-  color: #343a40;
-  font-weight: 700;
-  letter-spacing: 1px;
-  font-weight: bold;
-  margin-right: 600px;
-} */
-
 header nav {
   font-size: 14px;
   text-transform: uppercase;
@@ -77,13 +68,13 @@ header nav a:visited {
 }
 
 header nav a:hover {
-  color: #0d6efd;
+  color: #0078e7;
   font-weight: bold;
-  text-decoration: underline #0d6efd;
+  text-decoration: underline #0078e7;
 }
 
 header nav a:active {
-  color: #0d6efd;
+  color: #0078e7;
 }
 
 main {
@@ -100,18 +91,26 @@ main {
 }
 
 .menu h1 {
-  padding-bottom: 200px;
+  padding-top: 20px;
+  text-align: center;
+  padding-bottom: 50px;
 }
 
 .menu ul li {
   list-style-type: none;
-  border: 1px solid black;
+  border: 1px solid #c9c9c9;
   padding: 10px 0;
   text-align: center;
 }
 
 .menu ul li:last-child {
   margin-bottom: 30px;
+}
+
+.menu ul li:hover,
+.menu ul li a:hover {
+  background-color: #0078e7;
+  color: #fff;
 }
 
 .grid-3-cols {

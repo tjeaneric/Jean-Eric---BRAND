@@ -104,18 +104,25 @@ main {
 }
 
 .menu h1 {
-  padding-bottom: 200px;
+  padding-top: 20px;
+  text-align: center;
+  padding-bottom: 50px;
 }
 
 .menu ul li {
   list-style-type: none;
-  border: 1px solid black;
+  border: 1px solid #c9c9c9;
   padding: 10px 0;
   text-align: center;
 }
 
 .menu ul li:last-child {
   margin-bottom: 30px;
+}
+.menu ul li:hover,
+.menu ul li a:hover {
+  background-color: #0078e7;
+  color: #fff;
 }
 
 .grid-2-cols {
@@ -143,6 +150,7 @@ main {
 
 .delete-icon {
   font-size: 32px;
+  color: red;
 }
 
 .inbox-menu {
@@ -156,7 +164,7 @@ main {
 }
 
 .message-list ul li {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #c9c9c9;
   display: block;
   padding: 0 20px;
   position: relative;
@@ -185,4 +193,11 @@ main {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.reply-icon {
+  color: #0078e7;
+  position: absolute;
+  top: 10px;
+  right: 60px;
 }

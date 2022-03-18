@@ -133,9 +133,7 @@ main {
 }
 
 .tag-icon {
-  width: 32px;
-  height: 32px;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .blog-p {
@@ -157,8 +155,6 @@ main {
 }
 
 .like-comment {
-  width: 32px;
-  height: 32px;
   margin-right: 5px;
 }
 

@@ -33,7 +33,7 @@
     <div class="container">
       <main>
         <div class="menu">
-          <h1>Welcome</h1>
+          <h1>Articles</h1>
 
           <ul>
             <li><a href="../dashboard.html">Dashboard</a></li>
@@ -45,8 +45,6 @@
           </ul>
         </div>
         <div class="details">
-          <h2>Articles</h2>
-
           <div class="article-crud">
             <a href="new_article.html"
               ><i class="fa-solid fa-plus new-icon"></i
@@ -91,24 +89,63 @@
         let div = document.createElement("div");
         let title = document.createElement("p");
         let date = document.createElement("p");
-  
+        let deleteIcon = document.createElement("a");
+        let editIcon = document.createElement("a");
 
-        div.setAttribute("article-id", doc.id);
-        title.textContent = doc.data().Title;
-        date.textContent = doc.data().Date;
+
+        editIcon.setAttribute("href", "#");
+        editIcon.innerHTML = '<i class="fa-solid fa-pen-to-square editIcon"></i>';
+        deleteIcon.setAttribute("href", "#");
+        deleteIcon.innerHTML = '<i class="fa-solid fa-trash deleIcon"></i>';
+        div.setAttribute("article-id", doc._id);
+        title.textContent = doc.title;
+        
+        date.textContent = doc.createdAt;
+
         div.appendChild(title);
         div.appendChild(date);
+        div.appendChild(deleteIcon);
+        div.appendChild(editIcon);
 
         article.appendChild(div);
+
+         // DELETE DATA
+         deleteIcon.addEventListener("click", (e) => {
+          let id = e.target.parentElement.parentElement.getAttribute("article-id");
+          db.collection("Posts")
+            .doc(id)
+            .delete()
+            .then(() => {
+              console.log("Document successfully deleted!");
+              window.location.reload();
+            })
+            .catch((error) => {
+              console.error("Error removing document: ", error);
+            });
+        }); 
       }
 
-      db.collection("Posts")
+     /* db.collection("Posts")
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             renderMessage(doc);
           });
-        });
+        }); */
+
+        const fetchArticles = function () {
+          fetch("https://jean-eric-brand-api.herokuapp.com/api/v1/articles")
+            .then((response) => response.json())
+            .then((data) => {
+              const articles = data.data.data;
+              console.log(articles);
+              articles.forEach((article) => {
+                renderMessage(article);
+              });
+            });
+        };
+
+        fetchArticles()
     </script>
   </body>
 </html>
