@@ -143,7 +143,7 @@ form.addEventListener("submit", (e) => {
       }
     })
     .catch((error) => {
-      error;
+      console.log(error);
     });
 
   // app

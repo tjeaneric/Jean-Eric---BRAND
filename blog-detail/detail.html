@@ -42,7 +42,8 @@
         </section>
 
         <section id="article" class="row article">
-          <figure class="blog-text">
+          <figure class="blog-text"></figure>
+          <!-- <figure class="blog-text">
             <img src="img/theme.jpg" alt="" />
             <div class="tag">
               <i class="fa-solid fa-tag tag-icon"></i>
@@ -147,35 +148,132 @@
                 <button class="btn comment">Comment</button>
               </form>
             </div>
-          </figure>
+          </figure> -->
 
           <aside>
             <img src="img/aside1.jpg" alt="" />
             <img src="img/aside2.jpg" alt="" />
             <img src="img/aside3.jpg" alt="" />
           </aside>
+          <div class="leave-comment">
+            <h3>Leave a commnent</h3>
+            <form class="comment-form" action="#" method="post">
+              <textarea
+                class="comment-area"
+                placeholder="Your message:"
+                name="message"
+                id="comment"
+                cols="80"
+                rows="10"
+                required
+              ></textarea>
+
+              <input
+                class="contact-input"
+                type="text"
+                id="name"
+                placeholder="Your Name:"
+                required
+              />
+
+              <input
+                class="contact-input last-child"
+                type="email"
+                id="email"
+                placeholder="Your email:"
+                required
+              />
+
+              <button type="submit" class="btn comment">Comment</button>
+            </form>
+          </div>
         </section>
       </main>
       <footer>Copyright &copy; 2022 by Jean Eric. All rights reserved</footer>
     </div>
 
     <script>
-      const article_detail = document.querySelector("#article");
-      console.log(article_detail);
+      let figure_detail = document.querySelector(".blog-text");
+      console.log(figure_detail);
 
-      function renderArticle(doc) {
-        let figure = document.createElement("figure");
-        let image = document.createElement("image");
+      function renderArticle(doc, commentsData) {
+        let image = document.createElement("img");
+        let tag = document.createElement("div");
+        let icon = document.createElement("span");
+
+        let type = document.createElement("h4");
         let blog = document.createElement("p");
+        let commentRow = document.createElement("div");
+        let likeCount = document.createElement("div");
+        let commentCount = document.createElement("div");
+        let iconLike = document.createElement("span");
+        let iconComment = document.createElement("span");
+        let pLike = document.createElement("p");
+        let pComment = document.createElement("p");
 
+        let comments = document.createElement("div");
+        let commentsTitle = document.createElement("h3");
+
+        comments.className = "comments";
+        comments.id = "comments";
+
+        comments.appendChild(commentsTitle);
+        commentRow.className = "comment-row";
+        likeCount.className = "like-row";
+        commentCount.className = "like-row";
         blog.className = "blog-p";
-        blog.innerHTML = doc.author;
-        figure.className = "blog-text";
+        blog.innerHTML = doc.body;
+        tag.className = "tag";
+        icon.innerHTML = '<i class="fa-solid fa-tag tag-icon"></i>';
+        iconLike.innerHTML =
+          '<i class="fa-solid fa-thumbs-up like-comment"></i>';
+        iconComment.innerHTML =
+          '<i class="fa-solid fa-comment like-comment"></i>';
+        pLike.innerHTML = "33";
+        pComment.innerHTML = "33";
+        type.innerHTML = "Software application";
         image.src = doc.photo;
         console.log(doc.photo);
-        figure.appendChild(blog);
-        figure.appendChild(image);
-        article_detail.appendChild(figure);
+
+        likeCount.appendChild(iconLike);
+        likeCount.appendChild(pLike);
+        commentCount.appendChild(iconComment);
+        commentCount.appendChild(pComment);
+        commentRow.appendChild(likeCount);
+        commentRow.appendChild(commentCount);
+
+        tag.appendChild(icon);
+        tag.appendChild(type);
+        figure_detail.appendChild(image);
+        figure_detail.appendChild(tag);
+        figure_detail.appendChild(blog);
+        figure_detail.appendChild(commentRow);
+        figure_detail.appendChild(comments);
+
+        commentsData.forEach((comment) => {
+          console.log(comment);
+          let reply = document.createElement("div");
+          let commentBody = document.createElement("div");
+          let senderComment = document.createElement("p");
+          let replyIcon = document.createElement("p");
+          let commentDate = document.createElement("p");
+
+          commentBody.className = "comment-body";
+          commentDate.className = "comment-date";
+          reply.className = "reply-row";
+          commentBody.innerHTML = comment.comment;
+          commentsTitle.innerHTML = "Comments:";
+          senderComment.innerHTML = comment.author;
+          replyIcon.innerHTML = '<i class="fa-solid fa-reply reply"></i>reply';
+          commentDate.innerHTML = comment.createdAt;
+
+          reply.appendChild(senderComment);
+          reply.appendChild(replyIcon);
+
+          comments.appendChild(reply);
+          comments.appendChild(commentBody);
+          comments.appendChild(commentDate);
+        });
       }
 
       const qString = new URLSearchParams(window.location.search);
@@ -185,12 +283,49 @@
         .then((response) => response.json())
         .then((data) => {
           const article = data.data.data;
-          renderArticle(article);
-          console.log(article);
-          // articles.forEach((article) => {
-          //   renderMessage(article);
-          // });
+          const commentsData = data.data.data.comments;
+
+          renderArticle(article, commentsData);
         });
+
+      const commentForm = document.querySelector(".comment-form");
+
+      commentForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let author = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let comment = document.getElementById("comment").value;
+
+        fetch(
+          `https://jean-eric-brand-api.herokuapp.com/api/v1/articles/${id}/comments`,
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/JSON,text/plain,*/*,",
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+              author,
+              email,
+              comment,
+            }),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            window.location.reload();
+            console.log(data);
+            if (data.status === "success") {
+              alert("comment added");
+              console.log(data);
+            } else {
+              alert(data.error);
+            }
+          });
+
+        commentForm.reset();
+      });
     </script>
   </body>
 </html>
