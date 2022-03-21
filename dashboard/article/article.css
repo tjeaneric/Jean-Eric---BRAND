@@ -100,18 +100,26 @@ main {
 }
 
 .menu h1 {
-  padding-bottom: 200px;
+  padding-top: 20px;
+  text-align: center;
+  padding-bottom: 50px;
 }
 
 .menu ul li {
   list-style-type: none;
-  border: 1px solid black;
+  border: 1px solid #c9c9c9;
   padding: 10px 0;
   text-align: center;
 }
 
 .menu ul li:last-child {
   margin-bottom: 30px;
+}
+
+.menu ul li:hover,
+.menu ul li a:hover {
+  background-color: #0078e7;
+  color: #fff;
 }
 
 .grid-3-cols {
@@ -133,6 +141,7 @@ main {
 .grid-3-cols div {
   padding: 10px;
   background-color: #f6f7fa;
+  position: relative;
 }
 
 .article-crud {
@@ -148,4 +157,18 @@ main {
 .delete-icon {
   font-size: 32px;
   color: #f05959;
+}
+
+.deleIcon {
+  color: red;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.editIcon {
+  color: #0d6efd;
+  position: absolute;
+  top: 40px;
+  right: 10px;
 }

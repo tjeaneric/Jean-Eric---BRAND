@@ -56,17 +56,24 @@
               type="text"
               name="title"
               id="title"
-              placeholder="Title"
+              placeholder="Your Title"
+              required
             />
 
-            <input class="article-title" type="date" name="date" id="date" />
-            <input class="article-title" type="file" name="file" id="file" />
+            <input
+              class="article-title"
+              type="file"
+              name="file"
+              id="file"
+              required
+            />
             <textarea
               class="article-title"
               name="body"
               id="body"
               cols="30"
               rows="10"
+              required
             ></textarea>
             <button class="btn post" type="submit">Post</button>
           </form>
@@ -78,10 +85,13 @@
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+    <script>
+      CKEDITOR.replace("body");
+    </script>
 
     <script>
       const form = document.querySelector(".new-article-form");
-      console.log(form.title);
+      console.log(form);
 
       const firebaseConfig = {
         apiKey: "AIzaSyAZtamg7ALb_AZ4mDFwSJ7ld9p7O0R-3os",
@@ -95,38 +105,53 @@
 
       // Initialize Firebase
       const app = firebase.initializeApp(firebaseConfig);
-
+      const ref = firebase.storage().ref();
       const db = app.firestore();
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
-        let title = document.getElementById("title").value;
-        let date = document.getElementById("date").value;
-        let photo = document.getElementById("file").value;
-        let body = document.getElementById("body").value;
 
-        db.collection("Posts")
-          .add({
-            Title: title,
-            Date: date,
-            Photo: photo,
-            Body: body,
-          })
-          .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
-            alert("Article posted successfully");
-          })
-          .catch((error) => {
-            console.error("Error adding document: ", error);
-            alert(error);
-          });
-
-        form.reset();
+        const image = form.file.files[0];
+        const photoName = image.name;
+        var storageRef = app.storage().ref("blog photos/" + photoName);
+        var uploadTask = storageRef.put(image);
+        uploadTask.on(
+          "state_changed",
+          function (snapshot) {
+            var progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("upload is " + progress + " done");
+          },
+          function (error) {
+            console.log(error);
+          },
+          function () {
+            uploadTask.snapshot.ref
+              .getDownloadURL()
+              .then(function (downloadURL) {
+                const db = app.firestore();
+                db.collection("Posts")
+                  .add({
+                    Title: form.title.value,
+                    Date: Date(),
+                    Photo: downloadURL,
+                    Body: form.body.value,
+                  })
+                  .then((docRef) => {
+                    alert("New blog Added Successfully");
+                    window.location.href = "article.html";
+                    console.log(
+                      "New Article Added Successfully with the ID",
+                      docRef.id
+                    );
+                  })
+                  .catch((error) => {
+                    console.error("Error adding document: ", error);
+                  });
+              });
+          }
+        );
       });
-    </script>
-
-    <script>
-      CKEDITOR.replace("body");
     </script>
   </body>
 </html>

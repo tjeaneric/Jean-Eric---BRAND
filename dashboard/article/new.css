@@ -115,7 +115,7 @@ main {
 
 .menu ul li {
   list-style-type: none;
-  border: 1px solid black;
+  border: 1px solid #c9c9c9;
   padding: 10px 0;
   text-align: center;
 }

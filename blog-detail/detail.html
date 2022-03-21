@@ -11,6 +11,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="detail.css" />
+    <script
+      src="https://kit.fontawesome.com/125f9750f1.js"
+      crossorigin="anonymous"
+    ></script>
 
     <title>Blog Title</title>
   </head>
@@ -37,24 +41,12 @@
           <h3>Jean Eric > Blog > Blog detail</h3>
         </section>
 
-        <section class="row">
-          <figure class="blog-text">
+        <section id="article" class="row article">
+          <figure class="blog-text"></figure>
+          <!-- <figure class="blog-text">
             <img src="img/theme.jpg" alt="" />
             <div class="tag">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="tag-icon"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
-                />
-              </svg>
+              <i class="fa-solid fa-tag tag-icon"></i>
 
               <h4>Software application</h4>
             </div>
@@ -64,47 +56,17 @@
               eu placerat lorem condimentum nulla fusce dignissim. Adipiscing
               adipiscing tortor condimentum elit
             </p>
-            <blockquote>
-              “Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisi, ac
-              aliquam arcu volutpat, massa purus in.”
-            </blockquote>
             <p class="blog-p">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisi, ac
               aliquam arcu volutpat, massa purus in.
             </p>
             <div class="comment-row">
               <div class="like-row">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="like-comment"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  />
-                </svg>
+                <i class="fa-solid fa-thumbs-up like-comment"></i>
                 <p>33</p>
               </div>
               <div class="like-row">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="like-comment"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                  />
-                </svg>
+                <i class="fa-solid fa-comment like-comment"></i>
                 <p>33</p>
               </div>
             </div>
@@ -113,20 +75,7 @@
               <div class="reply-row">
                 <p>Gakyeli</p>
                 <p>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="reply"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
-                    />
-                  </svg>
+                  <i class="fa-solid fa-reply reply"></i>
                   reply
                 </p>
               </div>
@@ -141,20 +90,7 @@
               <div class="reply-row">
                 <p>Gakyeli</p>
                 <p>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="reply"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
-                    />
-                  </svg>
+                  <i class="fa-solid fa-reply reply"></i>
                   reply
                 </p>
               </div>
@@ -169,20 +105,7 @@
               <div class="reply-row">
                 <p>Gakyeli</p>
                 <p>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="reply"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"
-                    />
-                  </svg>
+                  <i class="fa-solid fa-reply reply"></i>
                   reply
                 </p>
               </div>
@@ -225,16 +148,184 @@
                 <button class="btn comment">Comment</button>
               </form>
             </div>
-          </figure>
+          </figure> -->
 
           <aside>
             <img src="img/aside1.jpg" alt="" />
             <img src="img/aside2.jpg" alt="" />
             <img src="img/aside3.jpg" alt="" />
           </aside>
+          <div class="leave-comment">
+            <h3>Leave a commnent</h3>
+            <form class="comment-form" action="#" method="post">
+              <textarea
+                class="comment-area"
+                placeholder="Your message:"
+                name="message"
+                id="comment"
+                cols="80"
+                rows="10"
+                required
+              ></textarea>
+
+              <input
+                class="contact-input"
+                type="text"
+                id="name"
+                placeholder="Your Name:"
+                required
+              />
+
+              <input
+                class="contact-input last-child"
+                type="email"
+                id="email"
+                placeholder="Your email:"
+                required
+              />
+
+              <button type="submit" class="btn comment">Comment</button>
+            </form>
+          </div>
         </section>
       </main>
       <footer>Copyright &copy; 2022 by Jean Eric. All rights reserved</footer>
     </div>
+
+    <script>
+      let figure_detail = document.querySelector(".blog-text");
+      console.log(figure_detail);
+
+      function renderArticle(doc, commentsData) {
+        let image = document.createElement("img");
+        let tag = document.createElement("div");
+        let icon = document.createElement("span");
+
+        let type = document.createElement("h4");
+        let blog = document.createElement("p");
+        let commentRow = document.createElement("div");
+        let likeCount = document.createElement("div");
+        let commentCount = document.createElement("div");
+        let iconLike = document.createElement("span");
+        let iconComment = document.createElement("span");
+        let pLike = document.createElement("p");
+        let pComment = document.createElement("p");
+
+        let comments = document.createElement("div");
+        let commentsTitle = document.createElement("h3");
+
+        comments.className = "comments";
+        comments.id = "comments";
+
+        comments.appendChild(commentsTitle);
+        commentRow.className = "comment-row";
+        likeCount.className = "like-row";
+        commentCount.className = "like-row";
+        blog.className = "blog-p";
+        blog.innerHTML = doc.body;
+        tag.className = "tag";
+        icon.innerHTML = '<i class="fa-solid fa-tag tag-icon"></i>';
+        iconLike.innerHTML =
+          '<i class="fa-solid fa-thumbs-up like-comment"></i>';
+        iconComment.innerHTML =
+          '<i class="fa-solid fa-comment like-comment"></i>';
+        pLike.innerHTML = "33";
+        pComment.innerHTML = "33";
+        type.innerHTML = "Software application";
+        image.src = doc.photo;
+        console.log(doc.photo);
+
+        likeCount.appendChild(iconLike);
+        likeCount.appendChild(pLike);
+        commentCount.appendChild(iconComment);
+        commentCount.appendChild(pComment);
+        commentRow.appendChild(likeCount);
+        commentRow.appendChild(commentCount);
+
+        tag.appendChild(icon);
+        tag.appendChild(type);
+        figure_detail.appendChild(image);
+        figure_detail.appendChild(tag);
+        figure_detail.appendChild(blog);
+        figure_detail.appendChild(commentRow);
+        figure_detail.appendChild(comments);
+
+        commentsData.forEach((comment) => {
+          console.log(comment);
+          let reply = document.createElement("div");
+          let commentBody = document.createElement("div");
+          let senderComment = document.createElement("p");
+          let replyIcon = document.createElement("p");
+          let commentDate = document.createElement("p");
+
+          commentBody.className = "comment-body";
+          commentDate.className = "comment-date";
+          reply.className = "reply-row";
+          commentBody.innerHTML = comment.comment;
+          commentsTitle.innerHTML = "Comments:";
+          senderComment.innerHTML = comment.author;
+          replyIcon.innerHTML = '<i class="fa-solid fa-reply reply"></i>reply';
+          commentDate.innerHTML = comment.createdAt;
+
+          reply.appendChild(senderComment);
+          reply.appendChild(replyIcon);
+
+          comments.appendChild(reply);
+          comments.appendChild(commentBody);
+          comments.appendChild(commentDate);
+        });
+      }
+
+      const qString = new URLSearchParams(window.location.search);
+      const id = qString.get("article_id");
+
+      fetch(`https://jean-eric-brand-api.herokuapp.com/api/v1/articles/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const article = data.data.data;
+          const commentsData = data.data.data.comments;
+
+          renderArticle(article, commentsData);
+        });
+
+      const commentForm = document.querySelector(".comment-form");
+
+      commentForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let author = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let comment = document.getElementById("comment").value;
+
+        fetch(
+          `https://jean-eric-brand-api.herokuapp.com/api/v1/articles/${id}/comments`,
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/JSON,text/plain,*/*,",
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+              author,
+              email,
+              comment,
+            }),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            window.location.reload();
+            console.log(data);
+            if (data.status === "success") {
+              alert("comment added");
+              console.log(data);
+            } else {
+              alert(data.error);
+            }
+          });
+
+        commentForm.reset();
+      });
+    </script>
   </body>
 </html>

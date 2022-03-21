@@ -15,7 +15,7 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="messages.css" />
-    <title>Articles</title>
+    <title>Messages</title>
   </head>
   <body>
     <header>
@@ -35,7 +35,7 @@
     <div class="container">
       <main>
         <div class="menu">
-          <h1>Dashboard</h1>
+          <h1>Messages</h1>
 
           <ul>
             <li><a href="../dashboard.html">Dashboard</a></li>
@@ -47,8 +47,6 @@
           </ul>
         </div>
         <div class="details">
-          <h2>Articles</h2>
-
           <div class="article-crud">
             <a href="#"><i class="fa-solid fa-trash delete-icon"></i></a>
           </div>
@@ -99,6 +97,8 @@
         let messageBody = document.createElement("p");
         let checkbox = document.createElement("input");
         let deleteIcon = document.createElement("a");
+        let replyIcon = document.createElement("a");
+
         checkbox.setAttribute("type", "checkbox");
         checkbox.className = "checkbox";
         name.className = "name";
@@ -106,11 +106,15 @@
         deleteIcon.setAttribute("href", "#");
         deleteIcon.innerHTML = '<i class="fa-solid fa-trash deleIcon"></i>';
 
+        replyIcon.setAttribute("href", "#");
+        replyIcon.innerHTML = '<i class="fa-solid fa-reply reply-icon"></i>';
+
         li.setAttribute("data-id", doc.id);
-        name.textContent = doc.data().Name;
-        messageBody.textContent = doc.data().Message;
+        name.textContent = doc.name;
+        messageBody.textContent = doc.message;
         li.appendChild(checkbox);
         li.appendChild(deleteIcon);
+        li.appendChild(replyIcon);
         li.appendChild(name);
         li.appendChild(messageBody);
 
@@ -134,13 +138,27 @@
         });
       }
 
-      db.collection("Messages")
+      /* db.collection("Messages")
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             renderMessage(doc);
           });
-        });
+        }); */
+
+      const fetchMessages = function () {
+        fetch("https://jean-eric-brand-api.herokuapp.com/api/v1/messagess")
+          .then((response) => response.json())
+          .then((data) => {
+            const messages = data.data.data;
+            console.log(messages);
+            messages.forEach((message) => {
+              renderMessage(message);
+            });
+          });
+      };
+
+      fetchMessages();
     </script>
   </body>
 </html>
