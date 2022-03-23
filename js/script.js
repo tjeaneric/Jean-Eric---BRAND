@@ -102,18 +102,18 @@ const form = document.querySelector(".login-form");
 const messageForm = document.querySelector(".contact-form");
 console.log(messageForm.name.value);
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAZtamg7ALb_AZ4mDFwSJ7ld9p7O0R-3os",
-  authDomain: "jean-eric-brand.firebaseapp.com",
-  projectId: "jean-eric-brand",
-  storageBucket: "jean-eric-brand.appspot.com",
-  messagingSenderId: "210719210014",
-  appId: "1:210719210014:web:18abc9d2f5b01745dc4c0f",
-  measurementId: "G-8HW0N7MV50",
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAZtamg7ALb_AZ4mDFwSJ7ld9p7O0R-3os",
+//   authDomain: "jean-eric-brand.firebaseapp.com",
+//   projectId: "jean-eric-brand",
+//   storageBucket: "jean-eric-brand.appspot.com",
+//   messagingSenderId: "210719210014",
+//   appId: "1:210719210014:web:18abc9d2f5b01745dc4c0f",
+//   measurementId: "G-8HW0N7MV50",
+// };
 
-// Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+// // Initialize Firebase
+// const app = firebase.initializeApp(firebaseConfig);
 
 // USER AUTHENTICATION
 
@@ -136,14 +136,16 @@ form.addEventListener("submit", (e) => {
   })
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
       if (data.status === "success") {
-        console.log(data);
-        window.location.href = "/dashboard/dashboard.html";
-        // window.localStorage.setItem("access_token", data.token);
+        localStorage.setItem("token", data.token);
+        window.setTimeout(() => {
+          location.assign("/dashboard/dashboard.html");
+        }, 1500);
+        // window.location.href = "/dashboard/dashboard.html";
+      } else if (data.status == "fail") {
+        alert("Invalid email or password");
       }
-    })
-    .catch((error) => {
-      console.log(error);
     });
 
   // app
@@ -208,7 +210,7 @@ messageForm.addEventListener("submit", (e) => {
         alert("Message sent");
         console.log(data);
       } else {
-        alert(data.error);
+        alert(data.message);
       }
     });
 
@@ -275,7 +277,7 @@ function renderArticle(doc) {
 
   figure.className = "blog-card";
   figure.setAttribute("article_id", doc._id);
-  console.log(doc._id);
+
   image.src = doc.photo;
   articleTitle.textContent = doc.title;
   articleDetails.textContent = doc.preview;

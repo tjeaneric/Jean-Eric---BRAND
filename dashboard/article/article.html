@@ -67,8 +67,9 @@
 
     <script>
       const logout = document.getElementById("logout");
+      let token = localStorage.getItem("token");
 
-      const firebaseConfig = {
+    /*  const firebaseConfig = {
         apiKey: "AIzaSyAZtamg7ALb_AZ4mDFwSJ7ld9p7O0R-3os",
         authDomain: "jean-eric-brand.firebaseapp.com",
         projectId: "jean-eric-brand",
@@ -76,13 +77,13 @@
         messagingSenderId: "210719210014",
         appId: "1:210719210014:web:18abc9d2f5b01745dc4c0f",
         measurementId: "G-8HW0N7MV50",
-      };
+      }; */
 
       const article = document.querySelector('#article');
       // Initialize Firebase
-      const app = firebase.initializeApp(firebaseConfig);
+      //const app = firebase.initializeApp(firebaseConfig);
 
-      const db = app.firestore();
+      //const db = app.firestore();
 
 
       function renderMessage(doc) {
@@ -112,7 +113,22 @@
          // DELETE DATA
          deleteIcon.addEventListener("click", (e) => {
           let id = e.target.parentElement.parentElement.getAttribute("article-id");
-          db.collection("Posts")
+          console.log(id)
+
+          fetch(
+            `https://jean-eric-brand-api.herokuapp.com/api/v1/articles/${id}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+            }
+          ).then((data) => {
+            location.reload();
+            console.log("Deleted");
+          });
+        /*  db.collection("Posts")
             .doc(id)
             .delete()
             .then(() => {
@@ -121,7 +137,7 @@
             })
             .catch((error) => {
               console.error("Error removing document: ", error);
-            });
+            }); */
         }); 
       }
 
@@ -146,6 +162,21 @@
         };
 
         fetchArticles()
+
+
+        //CHECK IF USER IS LOGGED IN
+        if (localStorage.getItem("token") == null) {
+          window.location.href = "/index.html";
+        }
+  
+        //LOGOUT
+  
+        logout.addEventListener("click", (e) => {
+          e.preventDefault();
+          localStorage.removeItem("token");
+          console.log("Sign-out successful.");
+          window.location.href = "/index.html";
+        });
     </script>
   </body>
 </html>
