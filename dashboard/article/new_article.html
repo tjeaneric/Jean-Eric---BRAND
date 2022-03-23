@@ -44,7 +44,7 @@
             <li><a href="article.html">Articles</a></li>
             <li><a href="">Profile</a></li>
 
-            <li><a href="/index.html">Logout</a></li>
+            <li><a id="logout" href="/index.html">Logout</a></li>
           </ul>
         </div>
         <div class="details">
@@ -57,6 +57,21 @@
               name="title"
               id="title"
               placeholder="Your Title"
+              required
+            />
+            <input
+              class="article-title"
+              type="text"
+              name="preview"
+              id="preview"
+              placeholder="Preview"
+              required
+            /><input
+              class="article-title"
+              type="text"
+              name="author"
+              id="author"
+              placeholder="Author"
               required
             />
 
@@ -85,72 +100,133 @@
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
-    <script>
+    <!-- <script type="text/javascript">
       CKEDITOR.replace("body");
-    </script>
+      CKEDITOR.instances.body.getData();
+    </script> -->
 
     <script>
       const form = document.querySelector(".new-article-form");
       console.log(form);
+      const logout = document.getElementById("logout");
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyAZtamg7ALb_AZ4mDFwSJ7ld9p7O0R-3os",
-        authDomain: "jean-eric-brand.firebaseapp.com",
-        projectId: "jean-eric-brand",
-        storageBucket: "jean-eric-brand.appspot.com",
-        messagingSenderId: "210719210014",
-        appId: "1:210719210014:web:18abc9d2f5b01745dc4c0f",
-        measurementId: "G-8HW0N7MV50",
-      };
+      /* const firebaseConfig = {
+            apiKey: "AIzaSyAZtamg7ALb_AZ4mDFwSJ7ld9p7O0R-3os",
+            authDomain: "jean-eric-brand.firebaseapp.com",
+            projectId: "jean-eric-brand",
+            storageBucket: "jean-eric-brand.appspot.com",
+            messagingSenderId: "210719210014",
+            appId: "1:210719210014:web:18abc9d2f5b01745dc4c0f",
+            measurementId: "G-8HW0N7MV50",
+          };
 
-      // Initialize Firebase
-      const app = firebase.initializeApp(firebaseConfig);
-      const ref = firebase.storage().ref();
-      const db = app.firestore();
+          // Initialize Firebase
+          const app = firebase.initializeApp(firebaseConfig);
+          const ref = firebase.storage().ref();
+          const db = app.firestore(); */
 
+      /*  document.getElementById("file").addEventListener("change", function () {
+        const image = new FileReader();
+        image.readAsDataURL(this.files[0]);
+        image.addEventListener("load", () => {
+          urlImage = image.result;
+          //document.getElementById("image-preview").src = urlImage;
+          debugger;
+        });
+      }); */
+      let token = localStorage.getItem("token");
       form.addEventListener("submit", (e) => {
         e.preventDefault();
+        console.log("Post");
+        let title = document.getElementById("title").value;
+        let preview = document.getElementById("preview").value;
+        let author = document.getElementById("author").value;
+        let photo = document.getElementById("file").files[0];
+        console.log(photo);
+        let body = document.getElementById("body").value;
+        /*  if (urlImage == undefined || urlImage == null) {
+          alert("Please select image");
+          return;
+        } */
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("preview", preview);
+        formData.append("author", author);
+        formData.append("photo", photo);
+        formData.append("body", body);
 
-        const image = form.file.files[0];
-        const photoName = image.name;
-        var storageRef = app.storage().ref("blog photos/" + photoName);
-        var uploadTask = storageRef.put(image);
-        uploadTask.on(
-          "state_changed",
-          function (snapshot) {
-            var progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log("upload is " + progress + " done");
+        fetch("https://jean-eric-brand-api.herokuapp.com/api/v1/articles", {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + token,
           },
-          function (error) {
-            console.log(error);
-          },
-          function () {
-            uploadTask.snapshot.ref
-              .getDownloadURL()
-              .then(function (downloadURL) {
-                const db = app.firestore();
-                db.collection("Posts")
-                  .add({
-                    Title: form.title.value,
-                    Date: Date(),
-                    Photo: downloadURL,
-                    Body: form.body.value,
-                  })
-                  .then((docRef) => {
-                    alert("New blog Added Successfully");
-                    window.location.href = "article.html";
-                    console.log(
-                      "New Article Added Successfully with the ID",
-                      docRef.id
-                    );
-                  })
-                  .catch((error) => {
-                    console.error("Error adding document: ", error);
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status == "success") {
+              alert("Article created");
+              console.log(data);
+              form.reset();
+            } else {
+              alert(data.error);
+            }
+          });
+
+        /*        const image = form.file.files[0];
+            const photoName = image.name;
+            var storageRef = app.storage().ref("blog photos/" + photoName);
+            var uploadTask = storageRef.put(image);
+            uploadTask.on(
+              "state_changed",
+              function (snapshot) {
+                var progress =
+                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                console.log("upload is " + progress + " done");
+              },
+              function (error) {
+                console.log(error);
+              },
+              function () {
+                uploadTask.snapshot.ref
+                  .getDownloadURL()
+                  .then(function (downloadURL) {
+                    const db = app.firestore();
+                    db.collection("Posts")
+                      .add({
+                        Title: form.title.value,
+                        Date: Date(),
+                        Photo: downloadURL,
+                        Body: form.body.value,
+                      })
+                      .then((docRef) => {
+                        alert("New blog Added Successfully");
+                        window.location.href = "article.html";
+                        console.log(
+                          "New Article Added Successfully with the ID",
+                          docRef.id
+                        );
+                      })
+                      .catch((error) => {
+                        console.error("Error adding document: ", error);
+                      });
                   });
-              });
-          }
-        );
+              }
+            ); */
+      });
+
+      //CHECK IF USER IS LOGGED IN
+      if (localStorage.getItem("token") == null) {
+        window.location.href = "/index.html";
+      }
+
+      //LOGOUT
+
+      logout.addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("token");
+        console.log("Sign-out successful.");
+        window.location.href = "/index.html";
       });
     </script>
   </body>

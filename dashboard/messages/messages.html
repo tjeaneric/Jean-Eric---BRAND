@@ -43,7 +43,7 @@
             <li><a href="../article/article.html">Articles</a></li>
             <li><a href="">Profile</a></li>
 
-            <li><a href="/index.html">Logout</a></li>
+            <li><a id="logout" href="/index.html">Logout</a></li>
           </ul>
         </div>
         <div class="details">
@@ -73,7 +73,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
 
     <script>
-      const firebaseConfig = {
+      /*   const firebaseConfig = {
         apiKey: "AIzaSyAZtamg7ALb_AZ4mDFwSJ7ld9p7O0R-3os",
         authDomain: "jean-eric-brand.firebaseapp.com",
         projectId: "jean-eric-brand",
@@ -81,14 +81,15 @@
         messagingSenderId: "210719210014",
         appId: "1:210719210014:web:18abc9d2f5b01745dc4c0f",
         measurementId: "G-8HW0N7MV50",
-      };
-      const message = document.querySelector("#message");
+      };*/
 
       // Initialize Firebase
-      const app = firebase.initializeApp(firebaseConfig);
+      //const app = firebase.initializeApp(firebaseConfig);
 
-      const db = app.firestore();
-
+      // const db = app.firestore();
+      let token = localStorage.getItem("token");
+      const message = document.querySelector("#message");
+      const logout = document.getElementById("logout");
       // READ DATA
 
       function renderMessage(doc) {
@@ -109,7 +110,7 @@
         replyIcon.setAttribute("href", "#");
         replyIcon.innerHTML = '<i class="fa-solid fa-reply reply-icon"></i>';
 
-        li.setAttribute("data-id", doc.id);
+        li.setAttribute("data-id", doc._id);
         name.textContent = doc.name;
         messageBody.textContent = doc.message;
         li.appendChild(checkbox);
@@ -126,7 +127,21 @@
           console.log("checked");
           console.log(id);
 
-          db.collection("Messages")
+          fetch(
+            `https://jean-eric-brand-api.herokuapp.com/api/v1/messages/${id}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+            }
+          ).then((data) => {
+            location.reload();
+            console.log("Deleted");
+          });
+
+          /*db.collection("Messages")
             .doc(id)
             .delete()
             .then(() => {
@@ -134,7 +149,7 @@
             })
             .catch((error) => {
               console.error("Error removing document: ", error);
-            });
+            }); */
         });
       }
 
@@ -147,7 +162,13 @@
         }); */
 
       const fetchMessages = function () {
-        fetch("https://jean-eric-brand-api.herokuapp.com/api/v1/messagess")
+        fetch("https://jean-eric-brand-api.herokuapp.com/api/v1/messages", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        })
           .then((response) => response.json())
           .then((data) => {
             const messages = data.data.data;
@@ -159,6 +180,20 @@
       };
 
       fetchMessages();
+
+      //CHECK IF USER IS LOGGED IN
+      if (localStorage.getItem("token") == null) {
+        window.location.href = "/index.html";
+      }
+
+      //LOGOUT
+
+      logout.addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("token");
+        console.log("Sign-out successful.");
+        window.location.href = "/index.html";
+      });
     </script>
   </body>
 </html>

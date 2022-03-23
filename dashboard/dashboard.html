@@ -72,6 +72,7 @@
     <script>
       const logout = document.getElementById("logout");
 
+      /*
       const firebaseConfig = {
         apiKey: "AIzaSyAZtamg7ALb_AZ4mDFwSJ7ld9p7O0R-3os",
         authDomain: "jean-eric-brand.firebaseapp.com",
@@ -80,12 +81,12 @@
         messagingSenderId: "210719210014",
         appId: "1:210719210014:web:18abc9d2f5b01745dc4c0f",
         measurementId: "G-8HW0N7MV50",
-      };
+      }; */
 
       // Initialize Firebase
-      const app = firebase.initializeApp(firebaseConfig);
+      //const app = firebase.initializeApp(firebaseConfig);
 
-      const db = app.firestore();
+      //const db = app.firestore();
 
       // CHECK IF USER IS LOGGED IN
 
@@ -95,21 +96,25 @@
         }
       }); */
 
+      if (localStorage.getItem("token") == null) {
+        window.location.href = "/index.html";
+      }
+
       //LOGOUT
 
       logout.addEventListener("click", (e) => {
         e.preventDefault();
-
-        firebase
-          .auth()
-          .signOut()
-          .then(() => {
-            console.log("Sign-out successful.");
-            window.location.href = "/index.html";
-          })
-          .catch((error) => {
-            // An error happened.
-          });
+        //  document.cookie.split(";").forEach(function (c) {
+        //  document.cookie = c
+        //  .replace(/^ +/, "")
+        //.replace(
+        ///=.*/,
+        //"=;expires=" + new Date().toUTCString() + ";path=/"
+        // );
+        //});
+        localStorage.removeItem("token");
+        console.log("Sign-out successful.");
+        window.location.href = "/index.html";
       });
     </script>
   </body>
