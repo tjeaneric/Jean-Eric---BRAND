@@ -110,7 +110,16 @@
 
         article.appendChild(div);
 
-         // DELETE DATA
+        //EDIT ARTICLE
+        editIcon.addEventListener("click", (e)=>{
+          e.preventDefault();
+          let id = e.target.parentElement.parentElement.getAttribute("article-id")
+          console.log(id)
+          location.href=`update_article.html?article_id=${id}`
+          
+        })
+
+         // DELETE ARTICLE
          deleteIcon.addEventListener("click", (e) => {
           let id = e.target.parentElement.parentElement.getAttribute("article-id");
           console.log(id)
