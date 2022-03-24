@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/125f9750f1.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="new.css" />
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+    <title>New Articles</title>
+  </head>
+  <body>
+    <header>
+      <a href="/index.html"
+        ><img class="my-logo" src="/img/logo1.png" alt=""
+      /></a>
+
+      <nav>
+        <a href="/index.html">Home</a>
+        <a href="#services">Services</a>
+        <a href="#resume">Resume</a>
+        <a href="#projects">Projects</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact-me">Contact</a>
+      </nav>
+    </header>
+    <div class="container">
+      <main>
+        <div class="menu">
+          <h1>Welcome</h1>
+
+          <ul>
+            <li><a href="../dashboard.html">Dashboard</a></li>
+            <li><a href="../messages/messages.html">Messages</a></li>
+            <li><a href="article.html">Articles</a></li>
+            <li><a href="">Profile</a></li>
+
+            <li><a id="logout" href="/index.html">Logout</a></li>
+          </ul>
+        </div>
+        <div class="details">
+          <h2>New Article</h2>
+
+          <form class="new-article-form" action="" method="post">
+            <input
+              class="article-title"
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Your Title"
+              required
+            />
+            <input
+              class="article-title"
+              type="text"
+              name="preview"
+              id="preview"
+              placeholder="Preview"
+              required
+            /><input
+              class="article-title"
+              type="text"
+              name="author"
+              id="author"
+              placeholder="Author"
+              required
+            />
+
+            <input
+              class="article-title"
+              type="text"
+              name="file"
+              id="current-file"
+              required
+            />
+            <textarea
+              class="article-title"
+              name="body"
+              id="body"
+              cols="30"
+              rows="10"
+              required
+            ></textarea>
+            <button class="btn post" type="submit">Update</button>
+          </form>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-storage.js"></script>
+
+    <script>
+      const form = document.querySelector(".new-article-form");
+      console.log(form);
+      const logout = document.getElementById("logout");
+      const qString = new URLSearchParams(window.location.search);
+      const id = qString.get("article_id");
+
+      let token = localStorage.getItem("token");
+
+      window.onload = () => {
+        let title = document.getElementById("title");
+        let preview = document.getElementById("preview");
+        let author = document.getElementById("author");
+        let photo = document.getElementById("current-file");
+        let body = document.getElementById("body");
+        fetch(
+          `https://jean-eric-brand-api.herokuapp.com/api/v1/articles/${id}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            const article = data.data.data;
+            console.log(article);
+            title.value = article.title;
+            preview.value = article.preview;
+            author.value = article.author;
+            photo.value = article.photo;
+            body.value = article.body;
+          });
+      };
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log("Update");
+        let title = document.getElementById("title").value;
+        let preview = document.getElementById("preview").value;
+        let author = document.getElementById("author").value;
+        //let photo = document.getElementById("file").files[0];
+        // console.log(photo);
+        let body = document.getElementById("body").value;
+        fetch(
+          `https://jean-eric-brand-api.herokuapp.com/api/v1/articles/${id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify({
+              title,
+              preview,
+              author,
+              body,
+            }),
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status == "success") {
+              alert("Article Updated");
+              console.log(data.data.data);
+              location.href = "article.html";
+            } else {
+              alert(data.error);
+            }
+          });
+      });
+
+      //CHECK IF USER IS LOGGED IN
+      if (localStorage.getItem("token") == null) {
+        window.location.href = "/index.html";
+      }
+
+      //LOGOUT
+
+      logout.addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem("token");
+        console.log("Sign-out successful.");
+        window.location.href = "/index.html";
+      });
+    </script>
+  </body>
+</html>
