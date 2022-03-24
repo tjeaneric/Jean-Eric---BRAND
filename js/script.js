@@ -206,15 +206,14 @@ messageForm.addEventListener("submit", (e) => {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      if (data.status == 200) {
+      if (data.status === "success") {
         alert("Message sent");
+        messageForm.reset();
         console.log(data);
       } else {
         alert(data.message);
       }
     });
-
-  messageForm.reset();
 });
 
 // messageForm.addEventListener("submit", (e) => {
